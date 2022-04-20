@@ -2,15 +2,26 @@
 pragma solidity ^0.8.13;
 
 contract ProofOfLove {
+    /// @notice NO MAIDENS?
     error NoMaidens();
+
+    /// @notice you're already in love...
     error AlreadyInLove();
+
+    /// @notice looks like they already have someone else :(
     error YouGotFrontrun();
 
+    /// @notice Name of the contract
     string public constant name = "Proof of Love";
 
+    /// @notice Wether two addresses are in love
     mapping(address => address) public getLover;
+
+    /// @notice Holds proposals from an address to another
     mapping(address => address) public getProposal;
 
+    /// @notice Propose to someone, or accept a proposal
+    /// @param _to Who you're proposing to
     function propose(address _to) public {
         if(getLover[msg.sender] != address(0)) revert AlreadyInLove();
         if(getLover[_to] != address(0)) revert YouGotFrontrun();
@@ -24,6 +35,7 @@ contract ProofOfLove {
         }
     }
 
+    /// @notice Break up with your current lover
     function breakUp() public {
         if(getLover[msg.sender] == address(0)) revert NoMaidens();
 
