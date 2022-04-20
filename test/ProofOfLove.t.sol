@@ -47,7 +47,7 @@ contract ProofOfLoveTest is Test {
 
         assertEq(pol.lovers(address(this)), address(user));
 
-        assertTrue(pol.breakUp());
+        pol.breakUp();
         assertEq(pol.lovers(address(this)), address(0));
     }
 

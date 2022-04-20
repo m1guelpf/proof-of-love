@@ -7,7 +7,7 @@ contract ProofOfLove {
     mapping (address => address) public proposals;
     mapping (address => address) public lovers;
 
-    function propose(address _to) public returns (bool success) {
+    function propose(address _to) public {
         require(lovers[msg.sender] == address(0), "you're already in love...");
         require(lovers[_to] == address(0), "looks like they already have someone else : (");
         // theyve already proposed, accept!! <3
@@ -17,11 +17,9 @@ contract ProofOfLove {
         } else {
             proposals[msg.sender] = _to;
         }
-
-        return true;
     }
 
-    function breakUp() public returns (bool success) {
+    function breakUp() public {
         require(lovers [msg.sender] != address(0), "NO MAIDENS?");
 
         if (lovers[lovers[msg.sender]] == msg.sender) {
@@ -29,7 +27,5 @@ contract ProofOfLove {
         }
 
         lovers[msg.sender] = address(0);
-
-        return true;
     }
 }
