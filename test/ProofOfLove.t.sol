@@ -36,7 +36,7 @@ contract ProofOfLoveTest is Test {
         vm.prank(address(user));
         pol.propose(address(this));
 
-        vm.expectRevert("you're already in love...");
+        vm.expectRevert(ProofOfLove.AlreadyInLove.selector);
         pol.propose(address(user));
     }
 
@@ -56,7 +56,7 @@ contract ProofOfLoveTest is Test {
     function testCannotBreakupIfNoMaidens() public {
         assertEq(pol.getLover(address(this)), address(0));
 
-        vm.expectRevert("NO MAIDENS?");
+        vm.expectRevert(ProofOfLove.NoMaidens.selector);
         pol.breakUp();
 
         assertEq(pol.getLover(address(this)), address(0));
